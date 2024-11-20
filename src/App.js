@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import BookingForm from "./components/BookingForm";
+import BookingList from "./components/BookingList";
 
 function App() {
+  const [bookings, setBookings] = useState([]);
+
+  const addBooking = (booking) => {
+    setBookings([...bookings, booking]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Welcome to Little Lemon - Table Booking</h1>
+      <BookingForm onAddBooking={addBooking} />
+      <BookingList bookings={bookings} />
     </div>
   );
 }
