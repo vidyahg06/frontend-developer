@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import './BookingForm.css';  // Import the CSS for styling
+import "./BookingForm.css"; // Import the CSS for styling
 
-function BookingForm({ onAddBooking }) {
+function BookingForm({ availableTimes, onAddBooking }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
@@ -49,14 +49,24 @@ function BookingForm({ onAddBooking }) {
       </div>
       <div className="form-field">
         <label>Time:</label>
-        <input
-          type="time"
+        <select
           value={time}
           onChange={(e) => setTime(e.target.value)}
           required
-        />
+        >
+          <option value="" disabled>
+            Select a time
+          </option>
+          {availableTimes.map((t, index) => (
+            <option key={index} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
       </div>
-      <button type="submit" className="submit-btn">Book Table</button>
+      <button type="submit" className="submit-btn">
+        Book Table
+      </button>
     </form>
   );
 }
